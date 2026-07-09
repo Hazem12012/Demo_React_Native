@@ -29,9 +29,8 @@ export default function App() {
   return (
     <SafeAreaView className="flex-1  bg-background p-5 ">
       {/* Subscriptions list of cards */}
-      {/* <ListHeading title="All Subscriptions" /> */}
       <FlatList
-      contentContainerClassName="pb-25"
+        contentContainerClassName="pb-25"
         ListHeaderComponent={() => (
           <>
             {/* Heading bar */}
@@ -76,7 +75,7 @@ export default function App() {
               />
             </View>
 
-            <ListHeading title="Subscriptions" />
+            <ListHeading title="All Subscriptions" />
           </>
         )}
         keyExtractor={(item) => item.id}

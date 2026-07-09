@@ -29,7 +29,7 @@ const SubscriptionCard = ({
         <View className="sub-main">
           <Image source={icon} className="sub-icon" />
           <View className="sub-copy">
-            <Text numberOfLines={1} className="suv-title">
+            <Text numberOfLines={1} className="sub-title">
               {name}
             </Text>
             <Text numberOfLines={1} className="sub-meta">
@@ -82,7 +82,7 @@ const SubscriptionCard = ({
                   className="sub-value"
                   numberOfLines={1}
                   ellipsizeMode="tail">
-                  {dayjs(startDate).format("MM/DD/YYYY") || "- - -"}
+                  {startDate ? dayjs(startDate).format("MM/DD/YYYY") : "- - -"}
                 </Text>
               </View>
             </View>
@@ -95,7 +95,9 @@ const SubscriptionCard = ({
                   className="sub-value"
                   numberOfLines={1}
                   ellipsizeMode="tail">
-                  {dayjs(renewalDate).format("MM/DD/YYYY") || "- - -"}
+                  {renewalDate
+                    ? dayjs(renewalDate).format("MM/DD/YYYY")
+                    : "- - -"}
                 </Text>
               </View>
             </View>
