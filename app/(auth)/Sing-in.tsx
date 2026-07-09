@@ -11,6 +11,11 @@ const SignIn = () => {
         className="mt-4 rounded bg-primary    p-4 text-xl text-white">
         sign up
       </Link>
+      <Link
+        href="/"
+        className="mt-4 rounded bg-primary    p-4 text-xl text-white">
+        home
+      </Link>
     </View>
   );
 };
