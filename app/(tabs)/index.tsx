@@ -1,6 +1,7 @@
 import images from "@/constants/images";
 import "@/global.css";
 import dayjs from "dayjs";
+import { useUser, useClerk } from "@clerk/expo";
 
 import {
   HOME_BALANCE,
@@ -12,7 +13,7 @@ import { icons } from "@/constants/icons";
 import { formatCurrency } from "@/lib/utils";
 import { styled } from "nativewind";
 import { useState } from "react";
-import { FlatList, Image, Text, View } from "react-native";
+import { FlatList, Image, Text, View, Pressable } from "react-native";
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 import ListHeading from "../components/ListHeading";
 import SubscriptionCard from "../components/SubscriptionCard";
@@ -22,6 +23,8 @@ const SafeAreaView = styled(RNSafeAreaView);
 
 //  in routs the index file is home page ):
 export default function App() {
+  const { user } = useUser();
+  const { signOut } = useClerk();
   const [expandedSubscriptiionId, setExpandedSubscriptionId] = useState<
     string | null
   >(null);
@@ -36,8 +39,18 @@ export default function App() {
             {/* Heading bar */}
             <View className="home-header">
               <View className="home-user">
-                <Image source={images.avatar} className="home-avatar" />
-                <Text className="home-user-name">{HOME_USER.name}</Text>
+                <Image
+                  source={user?.imageUrl ? { uri: user.imageUrl } : images.avatar}
+                  className="home-avatar"
+                />
+                <View className="justify-center">
+                  <Text className="home-user-name">
+                    {user?.fullName || user?.primaryEmailAddress?.emailAddress || "User"}
+                  </Text>
+                  <Pressable onPress={() => signOut()} className="ml-4 mt-1">
+                    <Text className="text-sm font-sans-semibold text-accent">Sign Out</Text>
+                  </Pressable>
+                </View>
               </View>
               <Image source={icons.add} className="home-add-icon" />
             </View>
